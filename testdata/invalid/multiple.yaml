@@ -1,0 +1,13 @@
+version: "1"
+project:
+  name: "../evil"
+services:
+  db:
+    type: mysql
+    version: ""
+    port: 99999
+application:
+  command: []
+  depends_on: [missing]
+  env_file: ../.env
+  healthcheck: {type: grpc, timeout: nonsense}

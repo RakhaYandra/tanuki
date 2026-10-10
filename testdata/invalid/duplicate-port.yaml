@@ -1,0 +1,12 @@
+version: "1"
+project:
+  name: pulse
+services:
+  postgres:
+    type: postgres
+    version: "16"
+    port: 5432
+  redis:
+    type: redis
+    version: "7"
+    port: 5432

@@ -1,0 +1,40 @@
+version: "1"
+
+project:
+  name: e2e
+
+runtime:
+  go: "1.27"
+
+services:
+  postgres:
+    type: postgres
+    version: "16"
+    port: 55432
+    healthcheck:
+      type: tcp
+      timeout: 30s
+
+  redis:
+    type: redis
+    version: "7"
+    port: 56379
+    healthcheck:
+      type: tcp
+      timeout: 30s
+
+application:
+  name: api
+  command:
+    - go
+    - run
+    - ./testdata/e2e/main.go
+  port: 18080
+  env_file: .env
+  depends_on:
+    - postgres
+    - redis
+  healthcheck:
+    type: http
+    path: /health
+    timeout: 60s
